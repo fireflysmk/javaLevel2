@@ -1,4 +1,18 @@
-package PACKAGE_NAME;
+public class Wall implements Jumpable {
+    private int height;
 
-public class Wall {
+    public Wall(int weight) {
+        this.height = weight;
+    }
+
+    public int getHeight() {
+        return this.height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public void jump() {
+    }
 }

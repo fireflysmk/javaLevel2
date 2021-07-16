@@ -1,4 +1,18 @@
-package PACKAGE_NAME;
+public class RunningTrack implements Runnable {
+    private int length;
 
-public class RunningTrack {
+    public RunningTrack(int length) {
+        this.length = length;
+    }
+
+    public int getLength() {
+        return this.length;
+    }
+
+    public void setLength(int length) {
+        this.length = length;
+    }
+
+    public void run() {
+    }
 }
