@@ -1,16 +1,24 @@
 public class HomeWorkApp {
-    // для теста пробрасываем выше в  мейн
-    public static void main(String[] args) throws MyArrayDataException, MySizeArrayException {
+
+    public static void main(String[] args) {
 
         String[][] testArr = {
                 {"1","1","1","1"},
                 {"2","2","2","2"},
              // {"3","3","3","3"},
-                {"3","blba","3","3"},
+                {"3","ff5","3","3"},
                 {"4","4","4","4"},
         };
+        try {
+            System.out.println("total summ: " + sumElemsIntArray(testArr));
+        } catch (MySizeArrayException e) {
+            System.out.println(e.getMessage());
+        } catch (MyArrayDataException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            System.out.println("Thank you, good bye!");
+        }
 
-        sumElemsIntArray(testArr);
 
     }
 
@@ -31,7 +39,6 @@ public class HomeWorkApp {
 
             }
         }
-        System.out.println("total sum:" + sum);
         return sum;
     }
 
