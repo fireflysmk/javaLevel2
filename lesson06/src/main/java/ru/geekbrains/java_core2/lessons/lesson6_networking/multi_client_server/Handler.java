@@ -4,14 +4,22 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Handler {
     private static int clientCounter = 0;
+
+
+
     private int clientNumber;
     private Socket socket;
     private DataOutputStream out;
     private DataInputStream in;
     private Thread handlerThread;
+    private String inputMessage;
+    private boolean isInputMessageExists;
+
 
     public Handler(Socket socket) {
         try {
@@ -27,10 +35,17 @@ public class Handler {
 
     public void handle() {
         handlerThread = new Thread(() -> {
+            String s;
             while (!Thread.currentThread().isInterrupted() && socket.isConnected()) {
                 try {
-                    String message = in.readUTF();
-                    System.out.printf("Client #%d: %s\n", this.clientNumber, message);
+                    inputMessage = in.readUTF();
+                    System.out.printf("Client #%d: %s\n", this.clientNumber, inputMessage);
+
+                    isInputMessageExists = true;
+
+                    String outputMessage = "Client" + this.clientNumber + " wrote: " + inputMessage;
+                    out.writeUTF(outputMessage);
+
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -39,7 +54,28 @@ public class Handler {
         handlerThread.start();
     }
 
+
     public Thread getHandlerThread() {
         return handlerThread;
+    }
+
+    public String getInputMessage(){
+        return inputMessage;
+    }
+
+    public boolean getIsInputMessageExists(){
+        return isInputMessageExists;
+    }
+
+    public void setFalseInputMessageExists() {
+        this.isInputMessageExists = false;
+    }
+
+    public DataOutputStream getOut() {
+        return out;
+    }
+
+    public int getClientNumber() {
+        return clientNumber;
     }
 }
